@@ -1,11 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope, FaAddressCard } from "react-icons/fa";
 import { FiArrowUpRight, FiDownload, FiTerminal } from "react-icons/fi";
+import { useBusinessCard } from "@/ContextApi/BusinessCardContext";
 import profileImg from "../assets/newprofile.jpeg";
 
 function Header() {
+  const { openCard } = useBusinessCard();
+
   return (
     <header id="home" className="relative min-h-[90vh] flex items-center justify-center pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 lg:pb-20 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
@@ -44,18 +47,6 @@ function Header() {
               I am <span className="text-white font-semibold">Shibin Siyad</span>, a passionate Full Stack & MERN Developer specializing in high-performance web applications, clean architecture, and responsive user interfaces.
             </p>
 
-            {/* Quick Tech Highlights */}
-            {/* <div className="flex flex-wrap items-center justify-center lg:justify-start gap-1.5 sm:gap-2 mb-8 sm:mb-10 max-w-xl">
-              {["React", "Next.js", "Node.js", "Express", "MongoDB", "Tailwind CSS"].map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-mono font-medium rounded-lg bg-white/5 border border-white/10 text-slate-300 hover:border-indigo-500/30 hover:bg-white/10 transition-colors"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div> */}
-
             {/* Call to Action Buttons */}
             <div className="w-full flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3.5 sm:gap-4">
               <a href="#projects" className="btn-primary w-full sm:w-auto text-center justify-center">
@@ -71,6 +62,14 @@ function Header() {
                 <FiDownload size={16} />
                 Download CV
               </a>
+
+              <button
+                onClick={openCard}
+                className="btn-secondary w-full sm:w-auto text-center justify-center cursor-pointer group"
+              >
+                <FaAddressCard size={16} className="text-indigo-400 group-hover:scale-110 transition-transform" />
+                <span>Digital Card</span>
+              </button>
 
               {/* Social Link Badges */}
               <div className="flex items-center justify-center gap-2.5 mt-2 sm:mt-0">

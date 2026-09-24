@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiMenu, FiX, FiGithub, FiLinkedin, FiMail, FiDownload } from "react-icons/fi";
+import { FaAddressCard } from "react-icons/fa";
 import { useTheme } from "../ContextApi/ThemeProvider";
+import { useBusinessCard } from "@/ContextApi/BusinessCardContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 function NavBar() {
   const pathname = usePathname();
   const { isDark, toggleTheme } = useTheme();
+  const { openCard } = useBusinessCard();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState(
@@ -101,7 +104,18 @@ function NavBar() {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2.5">
+            {/* Business Card Button */}
+            <button
+              onClick={openCard}
+              title="Digital Business Card"
+              aria-label="Digital Business Card"
+              className="px-3.5 py-1.5 rounded-full bg-indigo-500/15 hover:bg-indigo-500/25 border border-indigo-500/30 text-xs font-semibold text-indigo-300 hover:text-white flex items-center gap-1.5 transition-all cursor-pointer shadow-sm shadow-indigo-500/10"
+            >
+              <FaAddressCard size={14} className="text-indigo-400" />
+              {/* <span>Card</span> */}
+            </button>
+
             <a
               href="/Shibin_Siyad___Resume.pdf"
               download="Shibin_Siyad_Resume.pdf"
@@ -122,14 +136,25 @@ function NavBar() {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle Menu"
-            className="md:hidden w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-200 hover:text-white"
-          >
-            {isMenuOpen ? <FiX size={18} /> : <FiMenu size={18} />}
-          </button>
+          {/* Mobile Actions: Business Card + Menu Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={openCard}
+              title="Digital Business Card"
+              aria-label="Digital Business Card"
+              className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 hover:text-white transition-all cursor-pointer"
+            >
+              <FaAddressCard size={15} />
+            </button>
+
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle Menu"
+              className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-200 hover:text-white cursor-pointer"
+            >
+              {isMenuOpen ? <FiX size={18} /> : <FiMenu size={18} />}
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -162,6 +187,18 @@ function NavBar() {
                 );
               })}
             </div>
+
+            {/* Digital Business Card Button in Mobile Drawer */}
+            <button
+              onClick={() => {
+                setIsMenuOpen(false);
+                openCard();
+              }}
+              className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 text-indigo-300 font-semibold flex items-center justify-center gap-2 text-sm hover:text-white transition-all cursor-pointer"
+            >
+              <FaAddressCard size={16} className="text-indigo-400" />
+              <span>Digital Business Card</span>
+            </button>
 
             <div className="pt-4 border-t border-white/10 flex items-center justify-between">
               <a
