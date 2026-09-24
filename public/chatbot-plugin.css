@@ -65,6 +65,7 @@
 
 /* Chat window container (Glassmorphic) */
 .query-chatbot-window {
+  display: none;
   position: fixed;
   bottom: 92px;
   right: 24px;
@@ -79,7 +80,6 @@
   border: 1px solid rgba(226, 232, 240, 0.85);
   box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.12), 0 8px 16px -6px rgba(0, 0, 0, 0.06);
   z-index: 999998;
-  display: flex;
   flex-direction: column;
   overflow: hidden;
   transform-origin: bottom right;
@@ -90,6 +90,7 @@
 }
 
 .query-chatbot-window.open {
+  display: flex;
   opacity: 1;
   visibility: visible;
   transform: scale(1) translate(0, 0);
@@ -463,6 +464,28 @@
   stroke-width: 2.5;
   fill: none;
   transform: translateX(0.5px);
+}
+
+.query-chatbot-send-btn.loading {
+  opacity: 0.85;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.query-chatbot-send-btn .query-chatbot-spinner {
+  width: 15px;
+  height: 15px;
+  transform: none !important;
+  animation: queryChatbotSpin 0.75s linear infinite !important;
+}
+
+@keyframes queryChatbotSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Dark mode overrides */
