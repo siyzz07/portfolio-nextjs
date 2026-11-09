@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { FaGithub, FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa";
-import { FiArrowUp } from "react-icons/fi";
+import { FiArrowUp, FiHardDrive } from "react-icons/fi";
 
 function Footer() {
   const scrollToTop = () => {
@@ -62,9 +63,16 @@ function Footer() {
 
         </div>
 
-        {/* Copyright */}
-        <div className="mt-8 pt-6 border-t border-white/5 text-center text-xs text-slate-400 font-mono">
-          © {new Date().getFullYear()} Shibin Siyad. All rights reserved.
+        {/* Copyright & Quick Links */}
+        <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono">
+          <span>© {new Date().getFullYear()} Shibin Siyad. All rights reserved.</span>
+          <Link
+            href="/local"
+            className="inline-flex items-center gap-1.5 text-slate-400 hover:text-indigo-400 transition-colors px-2.5 py-1 rounded-md bg-white/5 border border-white/10 hover:border-indigo-500/30"
+          >
+            <FiHardDrive size={13} className="text-indigo-400" />
+            <span>Local Storage</span>
+          </Link>
         </div>
       </div>
     </footer>
